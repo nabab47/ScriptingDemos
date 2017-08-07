@@ -1,0 +1,17 @@
+#!/bin/bash
+
+cname="My Fake Company Inc." #set your company name as a variable to make this easily reusable
+fname="form.txt" #set the file name to also make easily reusable, optionally, make this a command line argument
+find="(COMPANY NAME)" #set the pattern to replace to make this easily reusable
+
+cont=0 #use this as a way to know when you are done looping
+
+while [ $cont -eq 0 ] #loop as long as cont is 0
+do
+    if grep -q "$find" $fname #check to see if the string exists in the file
+    then
+	sed -i "0,/$find/s//$cname/" $fname #if it does, replace it with the company name
+    else
+	cont=1 #if not, we are done and can set cont to 1 which will break the loop
+    fi
+done
