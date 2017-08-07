@@ -1,0 +1,51 @@
+######################
+# Animesh Pattanayak #
+# Sample Bash Script #
+######################
+
+###################################
+# This script is written with     
+# with education in mind. It      
+# displays many basic bash        
+# concepts while performing a     
+# basic task!                     
+###################################
+
+###################################
+# The objective here is to pick the
+# letters of the alphabet as fast 
+# as possible. Imagine you have a 
+# bucket with letters in it. You 
+# draw from this bucket until you 
+# draw an A. Then you continue 
+# drawing until you get a B. 
+# Continue this process until you
+# have drawn all 26 letters!
+###################################
+
+#!/bin/bash #this line lets the kernel know what interpreter to use
+
+ALPHABET=(A B C D E F G H I J K L M N O P Q R S T U V W X Y Z) #this is an array containing 26 elements, which are the letters of the alphabet
+
+flag=0 #this is a variable that will be used to determine when we have won the game
+count=0 #this is a variable that will be used to keep track of which letter we are searching for at any given moment
+
+#below is a while loop, while loops run as long as some condition is satisfied. Use this type of loop when you are unsure exactly how many times you want your loop to run
+
+while [ $flag -eq 0 ] #as long as the flag variable is equal to 0, the loop will run
+do
+    rand=$(( RANDOM % 26 )) #this assigns a random number between 0 and 25 to the variable rand
+    val=${ALPHABET[$rand]} #this assigns the value of an element in the ALPHABET array to the variable val
+    if [ $val == ${ALPHABET[$count]} ] #this checks whether or not you picked the correct variable
+    then
+	echo "GREAT! YOU PICKED: $val"
+	let count++ #this increments count, this ensures that we are now searching for the next letter in the alphabet
+    else
+	echo "$val: THAT'S NOT WHAT WE WERE LOOKING FOR..."
+    fi
+
+    if [ $count -eq 26 ] #this checks whether or not we have made it through the entire alphabet
+    then
+	flag=1 #this sets flag to 1, which will stop the loop from running
+    fi
+done
